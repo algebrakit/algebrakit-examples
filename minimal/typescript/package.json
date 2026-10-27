@@ -1,0 +1,24 @@
+{
+  "name": "algebrakit-minimal-typescript",
+  "private": true,
+  "description": "Minimal example: render an Algebrakit exercise from a Node.js/TypeScript backend.",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsx server.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@algebrakit/sdk": "^1.0.0",
+    "dotenv": "^17.3.1",
+    "http-proxy": "^1.18.1"
+  },
+  "devDependencies": {
+    "@types/http-proxy": "^1.17.17",
+    "@types/node": "^22.15.17",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.3"
+  }
+}
