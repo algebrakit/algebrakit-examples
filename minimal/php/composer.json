@@ -1,0 +1,17 @@
+{
+    "name": "algebrakit/minimal-php",
+    "description": "Minimal example: render an Algebrakit exercise from a PHP backend.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0",
+        "algebrakit/sdk-php": "^1.0",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "scripts": {
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -S localhost:3000 server.php"
+        ]
+    }
+}

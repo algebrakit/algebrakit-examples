@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebrakit minimal example - {{STACK}}</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- 1. Algebrakit configuration (must be set BEFORE loading the widget script) -->
+    <script>
+        AlgebraKIT = {
+            config: {
+                proxy: {
+                    url: '{{PROXY_URL}}'
+                }
+            }
+        };
+    </script>
+
+    <!-- 2. Load Algebrakit widget script -->
+    <script src="{{WIDGET_URL}}"></script>
+
+    <div class="page">
+        <header>
+            <p class="eyebrow">Minimal example · {{STACK}}</p>
+            <h1>Your first Algebrakit exercise</h1>
+            <p class="lead">Pick an exercise: your server creates a session for it and the Algebrakit widget renders it below. Every question type works with the same integration. Try a step, ask for a hint, and watch the learning events arrive.</p>
+            <details class="how">
+                <summary>How this page works</summary>
+                <ol>
+                    <li><strong>Your server creates a session.</strong> It calls <code>createSession()</code> from the Algebrakit SDK with the ID of the chosen exercise and puts the returned session ID in an <code>&lt;akit-exercise session-id="…"&gt;</code> element. Every page load gets a new session.</li>
+                    <li><strong>The page configures the widget, then loads it.</strong> <code>AlgebraKIT.config.proxy.url</code> is set before the widget script from widgets.algebrakit.com loads.</li>
+                    <li><strong>The widget talks to Algebrakit through your server.</strong> Its calls go to <code>/proxy/algebrakit/*</code> and the server adds your API key, so the key never reaches the browser.</li>
+                    <li><strong>The page listens for learning events.</strong> <code>AlgebraKIT.addExerciseListener()</code> reports what the student does, for example each step and whether it was correct.</li>
+                    <li><strong>The solution is the same session in solution mode.</strong> <em>Show solution</em> renders the session again with the <code>solution-mode</code> attribute. <em>Back to exercise</em> renders it without, and the student's work is still there.</li>
+                </ol>
+            </details>
+        </header>
+
+        <nav class="exercise-nav" aria-label="Exercises">
+            {{EXERCISE_NAV}}
+        </nav>
+
+        <div class="layout">
+            <section class="card exercise-card" id="exercise">
+                <div class="exercise-toolbar">
+                    <p class="loading">Loading exercise…</p>
+                    <button type="button" class="button" id="solution-toggle">Show solution</button>
+                </div>
+                <!-- 3. The exercise: the widget renders the session that your server created -->
+                <akit-exercise session-id="{{SESSION_ID}}"></akit-exercise>
+            </section>
+
+            <aside class="side card">
+                <div class="card-header log-header">
+                    <h2>Learning events</h2>
+                    <span class="session-id" id="session-id"></span>
+                </div>
+                <ol class="event-list" id="event-list"></ol>
+                <div class="log-footer">
+                    <button type="button" class="link-button" id="toggle-noise"></button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- 4. Listen for learning events (event-log.js only displays them) -->
+    <script src="/event-log.js"></script>
+    <script>
+        AlgebraKIT.addExerciseListener(logEvent);
+    </script>
+
+    <!-- 5. Show the solution: render the same session again, with or without solution-mode.
+         The widget reads its attributes once, so replace the element instead of changing it. -->
+    <script>
+        const solutionToggle = document.getElementById('solution-toggle');
+        solutionToggle.addEventListener('click', function () {
+            const current = document.querySelector('akit-exercise');
+            const showSolution = !current.hasAttribute('solution-mode');
+
+            const exercise = document.createElement('akit-exercise');
+            exercise.setAttribute('session-id', current.getAttribute('session-id'));
+            if (showSolution) exercise.setAttribute('solution-mode', '');
+            current.replaceWith(exercise);
+
+            solutionToggle.textContent = showSolution ? 'Back to exercise' : 'Show solution';
+        });
+    </script>
+
+</body>
+</html>

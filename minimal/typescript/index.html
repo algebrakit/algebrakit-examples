@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algebrakit minimal example - TypeScript</title>
+    <title>Algebrakit minimal example - {{STACK}}</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -24,13 +24,13 @@
 
     <div class="page">
         <header>
-            <p class="eyebrow">Minimal example · Node.js / TypeScript</p>
+            <p class="eyebrow">Minimal example · {{STACK}}</p>
             <h1>Your first Algebrakit exercise</h1>
             <p class="lead">Pick an exercise: your server creates a session for it and the Algebrakit widget renders it below. Every question type works with the same integration. Try a step, ask for a hint, and watch the learning events arrive.</p>
             <details class="how">
                 <summary>How this page works</summary>
                 <ol>
-                    <li><strong>Your server creates a session.</strong> <code>server.ts</code> calls <code>client.createSession()</code> with the ID of the chosen exercise and puts the returned session ID in an <code>&lt;akit-exercise session-id="…"&gt;</code> element. Every page load gets a new session.</li>
+                    <li><strong>Your server creates a session.</strong> It calls <code>createSession()</code> from the Algebrakit SDK with the ID of the chosen exercise and puts the returned session ID in an <code>&lt;akit-exercise session-id="…"&gt;</code> element. Every page load gets a new session.</li>
                     <li><strong>The page configures the widget, then loads it.</strong> <code>AlgebraKIT.config.proxy.url</code> is set before the widget script from widgets.algebrakit.com loads.</li>
                     <li><strong>The widget talks to Algebrakit through your server.</strong> Its calls go to <code>/proxy/algebrakit/*</code> and the server adds your API key, so the key never reaches the browser.</li>
                     <li><strong>The page listens for learning events.</strong> <code>AlgebraKIT.addExerciseListener()</code> reports what the student does, for example each step and whether it was correct.</li>
@@ -49,7 +49,7 @@
                     <p class="loading">Loading exercise…</p>
                     <button type="button" class="button" id="solution-toggle">Show solution</button>
                 </div>
-                <!-- 3. The exercise: the widget renders the session that server.ts created -->
+                <!-- 3. The exercise: the widget renders the session that your server created -->
                 <akit-exercise session-id="{{SESSION_ID}}"></akit-exercise>
             </section>
 

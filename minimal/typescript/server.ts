@@ -95,6 +95,7 @@ async function renderPage(slug: string | null): Promise<string> {
   const page = template
     .replace('{{PROXY_URL}}', PROXY_PREFIX)
     .replace('{{WIDGET_URL}}', WIDGET_URL)
+    .replaceAll('{{STACK}}', 'Node.js / TypeScript')
     .replace('{{EXERCISE_NAV}}', exerciseNav);
 
   if (session.error !== null) {

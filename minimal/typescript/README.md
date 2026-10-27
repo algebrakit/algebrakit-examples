@@ -1,6 +1,6 @@
 # Minimal example: Node.js / TypeScript
 
-The smallest working Algebrakit integration. A Node.js server creates an exercise session with the [Algebrakit TypeScript SDK](https://github.com/algebrakit-org/sdk-typescript) and serves a page where a student can work on the exercise.
+The smallest working Algebrakit integration. A Node.js server creates an exercise session with the [Algebrakit TypeScript SDK](https://github.com/algebrakit/sdk-typescript) and serves a page where a student can work on the exercise.
 
 ## Run it
 

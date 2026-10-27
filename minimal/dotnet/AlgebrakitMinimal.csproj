@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Lets `dotnet user-secrets set ALGEBRAKIT_API_KEY ...` store the key outside this folder -->
+    <UserSecretsId>algebrakit-minimal-dotnet</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Algebrakit.Sdk" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
