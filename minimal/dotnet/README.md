@@ -26,14 +26,27 @@ Each page load creates a new session. The session ID is shown above the event lo
 
 ## How it works
 
-```
-Browser                         Your server (Program.cs)             Algebrakit
-───────                         ────────────────────────             ──────────
-GET /?exercise=… ────────────▶  1. CreateSessionAsync(exerciseId) ─▶ api.algebrakit.com
-                                   ◀──────────────── session ID ───
-       ◀─────── 2. page with <akit-exercise session-id="…">
-3. widget script loads from widgets.algebrakit.com
-4. widget calls /proxy/algebrakit/* ──▶ adds x-api-key ────────────▶ api.algebrakit.com
+```text
+ Browser                      Your server (Program.cs)                   Algebrakit
+    │                                     │                                   │
+    │ 1. GET /?exercise=…                 │                                   │
+    │────────────────────────────────────▶│ CreateSessionAsync(exerciseId)    │
+    │                                     │──────────────────────────────────▶│
+    │                                     │ session ID                        │
+    │                                     │◀──────────────────────────────────│
+    │ 2. page with                        │                                   │
+    │    <akit-exercise session-id="…">   │                                   │
+    │◀────────────────────────────────────│                                   │
+    │                                     │                                   │
+    │    page loads the widget script     │                                   │
+    │    from widgets.algebrakit.com      │                                   │
+    │─────────────────────────────────────┼──────────────────────────────────▶│
+    │                                     │                                   │
+    │ 3. widget API calls to              │ adds x-api-key                    │
+    │    /proxy/algebrakit/*              │                                   │
+    │────────────────────────────────────▶│──────────────────────────────────▶│
+    │◀────────────────────────────────────│◀──────────────────────────────────│
+    │                                     │                                   │
 ```
 
 1. **The server creates a session.** On every page load, the server looks up the chosen exercise in `exercises` and calls `sessionService.CreateSessionAsync()` with its ID. The page shows the session with `<akit-exercise session-id="…"></akit-exercise>`. To try your own exercise, add its ID to `exercises` in [Program.cs](Program.cs).
