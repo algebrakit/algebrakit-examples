@@ -4,7 +4,7 @@ The smallest working Algebrakit integration. A PHP server creates an exercise se
 
 ## Run it
 
-Requires PHP 8.0 or newer, [Composer](https://getcomposer.org) and an Algebrakit API key.
+Requires PHP 8.1 or newer, [Composer](https://getcomposer.org) and an Algebrakit API key.
 
 ```bash
 composer install

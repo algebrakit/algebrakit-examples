@@ -30,9 +30,10 @@ use GuzzleHttp\Exception\GuzzleException;
 // Load environment variables from .env file
 Dotenv::createImmutable(__DIR__)->safeLoad();
 
+// A variable set in the environment wins over the value in .env
 function env(string $name, string $default = ''): string
 {
-    return $_ENV[$name] ?? (getenv($name) ?: $default);
+    return getenv($name) ?: ($_ENV[$name] ?? $default);
 }
 
 // Configuration
