@@ -26,12 +26,13 @@ SDK calls per language:
 
 | | TypeScript (`@algebrakit/sdk`) | PHP (`algebrakit/sdk-php`) | .NET (`Algebrakit.Sdk`) |
 |---|---|---|---|
-| Client | `new ApiClient(apiUrl, apiKey)` | `new SessionService($apiKey, null, $apiUrl)` | `new SessionService(httpClient, apiKey)` |
+| Client | `new ApiClient({ apiKey, baseUrl })` | `new SessionService($apiKey, baseUrl: $apiUrl)` | `new SessionService(apiKey, apiUrl)` |
 | Create a session | `createSession` | `createSession` | `CreateSessionAsync` |
 | Score / info | `getSessionScore` / `getSessionInfo` | `getSessionScore` / `getSessionInfo` | `GetSessionScoreAsync` / `GetSessionInfoAsync` |
 | Lock | `lockSession` | `lockOrUnlockSession` | `LockOrUnlockSessionAsync` |
+| Failed request | `AxiosError` | `AlgebrakitApiException` | `AlgebrakitApiException` |
 
-The .NET `SessionService` adds the API key to the `HttpClient`'s default headers, so give it its own `HttpClient`.
+The base URL is optional in all three; it defaults to `https://api.algebrakit.com`. The TypeScript SDK sets `apiVersion: 2` itself. In all three, the error message includes the API's explanation, for example `Algebrakit API error 401: … api-key is not valid`.
 
 ## Reference
 

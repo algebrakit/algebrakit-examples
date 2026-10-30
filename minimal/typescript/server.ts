@@ -50,7 +50,7 @@ const EXERCISES = [
   { slug: 'subtraction', title: 'Subtract multi-digit numbers', exerciseId: '489d0c1a-147f-47bc-86cb-6d7c8a90fe15' },
 ];
 
-const client = new ApiClient(API_URL, API_KEY);
+const client = new ApiClient({ apiKey: API_KEY, baseUrl: API_URL });
 const template = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8');
 
 // Static files used by the page (styling and event log display only)
@@ -65,7 +65,6 @@ async function createExerciseSession(exerciseId: string): Promise<SessionResult>
   try {
     const request: CreateSessionRequest = {
       exercises: [{ exerciseId, version: 'latest' }],
-      apiVersion: 2,
     };
 
     const response = await client.createSession(request);

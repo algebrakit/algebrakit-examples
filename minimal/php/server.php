@@ -61,7 +61,7 @@ const STATIC_FILES = ['/style.css', '/event-log.js'];
 function createExerciseSession(string $exerciseId): array
 {
     try {
-        $sessionService = new SessionService(API_KEY, null, API_URL);
+        $sessionService = new SessionService(API_KEY, baseUrl: API_URL);
         $response = $sessionService->createSession(
             new CreateSessionRequest(exercises: [new ExerciseById($exerciseId, 'latest')])
         );

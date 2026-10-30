@@ -48,7 +48,7 @@ ExerciseOption[] exercises =
 var app = builder.Build();
 var root = app.Environment.ContentRootPath;
 var template = File.ReadAllText(Path.Combine(root, "index.html"));
-var sessionService = new SessionService(new HttpClient { BaseAddress = new Uri(apiUrl) }, apiKey!);
+var sessionService = new SessionService(apiKey!, apiUrl);
 
 async Task<(string? SessionId, string? Error)> CreateExerciseSession(string exerciseId)
 {
